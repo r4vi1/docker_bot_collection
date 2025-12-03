@@ -541,8 +541,8 @@ def get_destination_image_path(source_img, registry_config):
     Parse source image URL and construct destination paths for Quay registry.
     
     This function implements the specific logic for your registry structure:
-    Source: asia-south1-docker.pkg.dev/tsg1-apigee-anthos-prod/asia-south1-docker-pkg-dev/account-validation-rajasthan-prod:f7b4af8
-    Dest:   quay-registry.apps.ocpcorpprod.icicibankltd.com/apigee_hybrid_dmz_prod/tsg1-apigee-anthos-prod/account-validation-rajasthan-prod:f7b4af8
+    # Source: region-docker.pkg.dev/project-id/repo-name/image:tag
+    # Dest:   quay-registry.example.com/namespace/project-id/image:tag
     
     Args:
         source_img: The source image URL

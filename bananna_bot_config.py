@@ -13,30 +13,30 @@ import os
 # Each registry has its own API token for proper authentication and security
 REGISTRIES = {
     "prod": {
-        "url": "quay-registry.apps.ocpcorpprod.icicibankltd.com",
-        "namespace": "apigee_hybrid_dmz_prod",
-        "api_token": "PROD_TOKEN",
-        "organization": "apigee_hybrid_dmz_prod"  # Used for API calls
+        "url": "quay-registry.example.com",
+        "namespace": "prod-namespace",
+        "api_token": os.getenv("QUAY_PROD_API_TOKEN", "YOUR_PROD_API_TOKEN_HERE"),
+        "organization": "prod-org"  # Used for API calls
     },
     "dr": {
-        "url": "quay-registry.apps.ocpcorpdr.icicibankltd.com", 
-        "namespace": "apigee_hybrid_dmz_prod",
-        "api_token": "PROD_TOKEN",
-        "organization": "apigee_hybrid_dmz_prod"  # Used for API calls
+        "url": "quay-registry-dr.example.com", 
+        "namespace": "dr-namespace",
+        "api_token": os.getenv("QUAY_DR_API_TOKEN", "YOUR_DR_API_TOKEN_HERE"),
+        "organization": "dr-org"  # Used for API calls
     },
     "uat": {
-        "url": "quay-registry.apps.ocpcorpuat.icicibankltd.com",
-        "namespace": "tsg1-apigee-hybrid-dmz",
+        "url": "quay-registry-uat.example.com",
+        "namespace": "uat-namespace",
         "api_token": os.getenv("QUAY_UAT_API_TOKEN", "YOUR_UAT_API_TOKEN_HERE"),
-        "organization": "tsg1-apigee-hybrid-dmz"  # Used for API calls
+        "organization": "uat-org"  # Used for API calls
     }
 }
 
 # Security measure: Only allow images from these two specific registries
 # This prevents accidental mirroring of unauthorized images
 ALLOWED_SOURCE_REGISTRIES = [
-    "asia-south1-docker.pkg.dev/tsg1-apigee-anthos-prod",
-    "asia.gcr.io/tsg1-apigee-anthos-prod"
+    "region-docker.pkg.dev/project-id",
+    "region.gcr.io/project-id"
 ]
 
 # Images to mirror configuration
@@ -45,13 +45,13 @@ ALLOWED_SOURCE_REGISTRIES = [
 #     "description": "Optional description for tracking and logging"
 # }
 IMAGES_TO_MIRROR = {
-    "asia-south1-docker.pkg.dev/tsg1-apigee-anthos-prod/asia-south1-docker-pkg-dev/account-validation-rajasthan-prod:f7b4af8": {
+    "region-docker.pkg.dev/project-id/repo-name/image:tag": {
         "targets": ["prod", "dr"],
-        "description": "Account validation service for Rajasthan production"
+        "description": "Example service for production"
     },
-    "asia.gcr.io/tsg1-apigee-anthos-prod/aadhar-seeding-npci-prod:5389f2a": {
+    "region.gcr.io/project-id/another-image:tag": {
         "targets": ["prod", "dr"],
-        "description": "Aadhar seeding service for NPCI production"
+        "description": "Another example service"
     },
     # Add more images here as needed
 }
